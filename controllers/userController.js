@@ -1,5 +1,6 @@
 const User = require('../models/user');
 
+
 const getUsers = async (req, res) => {
   try {
     const results = await User.find();
@@ -11,10 +12,11 @@ const getUsers = async (req, res) => {
 
 const addUser = async (req, res) => {
   try {
-    const { name, email, description } = req.params;
-    const user = new User({ name, email, description });
-    user.save();
-    
+    console.log('req', req.body);
+    // const { name, email, description } = req.params;
+    // const user = new User({ name, email, description });
+    // user.save();
+    res.send(req.body);
   } catch(err) {
     console.log(err);
   }
@@ -22,4 +24,5 @@ const addUser = async (req, res) => {
 
 module.exports = {
   getUsers,
+  addUser,
 }

@@ -3,6 +3,7 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const bodyParser = require('body-parser');
 const userRoutes = require('./routes/userRoutes');
 
 const port = process.env.PORT || 8080;
@@ -17,10 +18,13 @@ mongoose.connect(dbUri, {useNewUrlParser: true, useUnifiedTopology: true})
 })
 .catch((err) => console.log(err));
 
-app.use(cors());
 
 // middleware & static files
 app.use(express.static('public'));  
+app.use(cors());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
 
 app.get('/', (req, res) => {
   res.redirect('/users');

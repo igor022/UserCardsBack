@@ -17,7 +17,6 @@ mongoose.connect(dbUri, {useNewUrlParser: true, useUnifiedTopology: true})
 })
 .catch((err) => console.log(err));
 
-
 app.use(cors());
 
 // middleware & static files

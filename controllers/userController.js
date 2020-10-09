@@ -25,6 +25,16 @@ const addUser = async (req, res) => {
   }
 }
 
+const editUser = async (req, res) => {
+  try {
+    const { user } = req.body;
+    const updatedUser = await User.findByIdAndUpdate(user._id, user);
+    return updatedUser;
+  } catch(err) {
+    throw(err);
+  }
+}
+
 const deleteUser = async (req, res) => {
   try {
     // delete user
@@ -35,12 +45,13 @@ const deleteUser = async (req, res) => {
     res.send(results);
 
   } catch (err) {
-    console.log(err);
+    throw(err);
   }
 }
 
 module.exports = {
   getUsers,
   addUser,
+  editUser,
   deleteUser
 }

@@ -10,4 +10,6 @@ router.post('/', userController.addUser);
 
 router.delete('/', userController.deleteUser);
 
+router.patch('/', userController.editUser);
+
 module.exports = router;

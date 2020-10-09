@@ -1,9 +1,13 @@
 const User = require('../models/user');
 
+const loadUsers = async() => {
+  const results = await User.find().sort({ createdAt: -1 });
+  return results;
+} 
 
 const getUsers = async (req, res) => {
   try {
-    const results = await User.find();
+    const results = await loadUsers();
     res.send(results);
   } catch(err) {
     console.log(err);
@@ -12,12 +16,25 @@ const getUsers = async (req, res) => {
 
 const addUser = async (req, res) => {
   try {
-    console.log('req', req.body);
-    // const { name, email, description } = req.params;
-    // const user = new User({ name, email, description });
-    // user.save();
-    res.send(req.body);
+    const { name, email, description } = req.body;
+    const user = new User({ name, email, description });
+    await user.save();
+    res.send(user);
   } catch(err) {
+    console.log(err);
+  }
+}
+
+const deleteUser = async (req, res) => {
+  try {
+    // delete user
+    const id = req.body.id;
+    await User.findByIdAndDelete(id);
+    // load updated list of users
+    const results = await loadUsers();
+    res.send(results);
+
+  } catch (err) {
     console.log(err);
   }
 }
@@ -25,4 +42,5 @@ const addUser = async (req, res) => {
 module.exports = {
   getUsers,
   addUser,
+  deleteUser
 }

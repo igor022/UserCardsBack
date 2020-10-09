@@ -3,6 +3,7 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const userRoutes = require('./routes/userRoutes');
 
@@ -21,14 +22,19 @@ mongoose.connect(dbUri, {useNewUrlParser: true, useUnifiedTopology: true})
 
 // middleware & static files
 app.use(express.static('public'));  
+
 app.use(cors());
+
+app.use(morgan('dev'));
+
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-
+// root routes
 app.get('/', (req, res) => {
   res.redirect('/users');
 })
+
 // user routes
 app.use('/users', userRoutes);
 

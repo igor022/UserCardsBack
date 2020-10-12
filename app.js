@@ -6,6 +6,7 @@ const cors = require('cors');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const userRoutes = require('./routes/userRoutes');
+const authRoutes = require('./routes/authRoutes');
 
 const port = process.env.PORT || 8080;
 
@@ -37,6 +38,9 @@ app.get('/', (req, res) => {
 
 // user routes
 app.use('/users', userRoutes);
+
+// auth routes 
+app.use('/auth', authRoutes);
 
 app.use((req, res) => {
   res.status(404).send();

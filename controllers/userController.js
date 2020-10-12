@@ -28,8 +28,9 @@ const addUser = async (req, res) => {
 const editUser = async (req, res) => {
   try {
     const { user } = req.body;
-    const updatedUser = await User.findByIdAndUpdate(user._id, user);
-    return updatedUser;
+    await User.updateOne({ _id: user._id }, user);
+    const updatedUser = await User.findOne({ _id: user._id});
+    res.send(updatedUser);
   } catch(err) {
     throw(err);
   }

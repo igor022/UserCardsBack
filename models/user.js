@@ -10,9 +10,9 @@ const userSchema = new Schema({
     type: String,
     required: true
   },
-  description: {
-    type: String,
-  }
+  description: String,
+  tags: [],
+
 }, { timestamps: true })
 
 const User = mongoose.model('User', userSchema);

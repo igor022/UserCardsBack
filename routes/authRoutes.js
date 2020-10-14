@@ -8,6 +8,5 @@ router.post('/signup', authController.signupPost);
 
 router.post('/login', authController.loginPost);
 
-router.get('/cookies', authController.cookiesGet);
 
 module.exports = router;

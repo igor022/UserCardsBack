@@ -33,16 +33,34 @@ const signupPost = async (req, res) => {
     const stuff = await Stuff.create({ name, email, password });
     const token = createToken(stuff._id);
     res.cookie('jwt', token, { maxAge: maxAgeInSec * 1000, httpOnly: true });
-    res.status(201).json(stuff); 
+    res.status(201).json({ _id: stuff._id }); 
   } catch (err) {
     
-    res.status(400).json(handleErrors(err));
+    res.status(400).json({ errors: handleErrors(err) });
   }
 }
 
-const loginPost = (req, res) => {
-  console.log(req.cookies);
-  res.send(req.cookies);
+const loginPost = async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    const stuff = await Stuff.login(email, password);
+    const token = createToken(stuff._id);
+    res.cookie('jwt', token, { maxAge: maxAgeInSec * 1000, httpOnly: true });
+    res.status(200).json({ _id: stuff._id });
+  } catch (err) {
+    const errors = handleErrors(err);
+    console.log(errors);
+    res.status(400).json({});
+  }
+}
+
+const loginGet = (req, res) => {
+
+}
+
+const signupGet = (req, res) => {
+  
 }
 
 const cookiesGet = (req, res) => {

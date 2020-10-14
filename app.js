@@ -9,6 +9,7 @@ const cookieParser = require('cookie-parser');
 const userRoutes = require('./routes/userRoutes');
 const authRoutes = require('./routes/authRoutes');
 
+
 const port = process.env.PORT || 8080;
 
 const app = express();

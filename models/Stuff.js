@@ -35,6 +35,18 @@ stuffSchema.post('save', function (doc, next) {
   next();
 });
 
+stuffSchema.statics.login = async function(email, password) {
+  const stuff = await this.findOne({ email });
+  if (stuff) {
+    const auth = await bcrypt.compare(password, stuff.password);
+    if (auth) {
+      return stuff;
+    }
+    throw Error('incorrect password');
+  }
+  throw Error('incorrect email');
+}
+
 const Stuff = mongoose.model('Stuff', stuffSchema);
 
 module.exports = Stuff;

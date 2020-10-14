@@ -1,3 +1,4 @@
+const jwt = require('jsonwebtoken');
 const Stuff = require('../models/Stuff')
 
 const handleErrors = (err) => {
@@ -18,15 +19,20 @@ const handleErrors = (err) => {
   return errors;
 }
 
-const signupGet = (req, res) => {
-  res.send("signup");
+const maxAgeInSec = 24 * 60 * 60;
+const createToken = (id) => {
+  return jwt.sign({ id }, process.env.JWT_SECRET, {
+    expiresIn: maxAgeInSec,
+  })
 }
 
 const signupPost = async (req, res) => {
-  const { email, password } = req.body;
+  const { name, email, password } = req.body;
 
   try {
-    const stuff = await Stuff.create({ email, password });
+    const stuff = await Stuff.create({ name, email, password });
+    const token = createToken(stuff._id);
+    res.cookie('jwt', token, { maxAge: maxAgeInSec * 1000, httpOnly: true });
     res.status(201).json(stuff); 
   } catch (err) {
     
@@ -34,17 +40,18 @@ const signupPost = async (req, res) => {
   }
 }
 
-const loginGet = (req, res) => {
-  res.send("login");
+const loginPost = (req, res) => {
+  console.log(req.cookies);
+  res.send(req.cookies);
 }
 
-const loginPost = (req, res) => {
-  res.json(req.body);
+const cookiesGet = (req, res) => {
+  res.cookie('newUser', true, { httpOnly: true });
+  res.send('you got the cookies!');
 }
 
 module.exports = {
-  signupGet,
   signupPost,
-  loginGet,
-  loginPost
+  loginPost,
+  cookiesGet
 }

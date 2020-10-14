@@ -6,12 +6,16 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const stuffSchema = new Schema({
+  name: {
+    type: String,
+    required: [true, 'Please enter a name'],
+  },
   email: {
     type: String,
     required: [true, 'Please enter an email'],
     unique: true,
     lowercase: true,
-    validate: [isEmail, 'Please enter a valid email']
+    validate: [isEmail, 'Please enter a valid email'],
   },
   password: {
     type: String,

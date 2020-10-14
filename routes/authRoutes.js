@@ -13,4 +13,10 @@ router.get('/login', authController.loginGet);
 
 router.post('/login', authController.loginPost);
 
+
+router.get('/cookies', (req, res) => {
+  res.setHeader('Set-Cookie', 'newUser=true');
+  res.send('you got the cookies!');
+});
+
 module.exports = router;

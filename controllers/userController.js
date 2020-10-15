@@ -40,10 +40,9 @@ const deleteUser = async (req, res) => {
   try {
     // delete user
     const id = req.body.id;
-    await User.findByIdAndDelete(id);
-    // load updated list of users
-    const results = await loadUsers();
-    res.send(results);
+    const user = await User.findByIdAndDelete(id);
+    
+    res.send(user);
 
   } catch (err) {
     throw(err);

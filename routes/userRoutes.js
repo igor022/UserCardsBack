@@ -7,9 +7,9 @@ const userController = require('../controllers/userController');
 
 router.get('/', userController.getUsers);
 
-router.post('/', requireAuth, userController.addUser);
+router.post('/',  userController.addUser);
 
-router.delete('/', requireAuth, userController.deleteUser);
+router.delete('/',  userController.deleteUser);
 
 router.patch('/', requireAuth, userController.editUser);
 

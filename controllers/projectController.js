@@ -7,7 +7,7 @@ const getProjects = async (req, res) => {
     
     res.send(results);
   } catch(err) {
-    console.log(err);
+    res.send(err);
   }
 }
 
@@ -19,7 +19,7 @@ const addProject = async (req, res) => {
     
     res.send(addedProject);
   } catch(err) {
-    console.log(err);
+    res.send(err);
   }
 }
 
@@ -31,7 +31,7 @@ const editProject = async (req, res) => {
     
     res.send(updatedProject);
   } catch(err) {
-    throw(err);
+    res.send(err);
   }
 }
 
@@ -44,9 +44,10 @@ const deleteProject = async (req, res) => {
     res.send(project);
 
   } catch (err) {
-    throw(err);
+    res.send(err);
   }
 }
+
 
 module.exports = {
   getProjects,

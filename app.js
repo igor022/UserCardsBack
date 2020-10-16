@@ -5,6 +5,8 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
+
+const projectRoutes = require('./routes/projectRoutes');
 const userRoutes = require('./routes/userRoutes');
 const authRoutes = require('./routes/authRoutes');
 
@@ -37,6 +39,9 @@ app.use(bodyParser.json());
 app.get('/', (req, res) => {
   res.redirect('/users');
 })
+
+// project routes
+app.use('/projects', projectRoutes);
 
 // user routes
 app.use('/users', userRoutes);

@@ -16,10 +16,10 @@ const getUsers = async (req, res) => {
 
 const addUser = async (req, res) => {
   try {
-    const { name, email, description } = req.body;
-    const user = new User({ name, email, description });
-    await user.save();
-    res.send(user);
+    const { user } = req.body;
+    const newUser = new User(user);
+    await newUser.save();
+    res.send(newUser);
   } catch(err) {
     console.log(err);
   }
@@ -39,7 +39,7 @@ const editUser = async (req, res) => {
 const deleteUser = async (req, res) => {
   try {
     // delete user
-    const id = req.body.id;
+    const { id } = req.body;
     const user = await User.findByIdAndDelete(id);
     
     res.send(user);

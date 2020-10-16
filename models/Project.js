@@ -8,14 +8,18 @@ const projectSchema = new Schema({
   },
   status: {
     type: String,
+    required: true
   },
   price: {
     type: String,
     required: true
   },
   devs: [],
+  description: {
+    type: String,
+  },
 }, { timestamps: true })
 
-const Project = mongoose.Model('Project', projectSchema);
+const Project = mongoose.model('Project', projectSchema);
 
-export default Project;
+module.exports = Project;

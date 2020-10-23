@@ -11,8 +11,8 @@ const userSchema = new Schema({
     required: true
   },
   description: String,
-  imageUrl: String,
   tags: [],
+
 }, { timestamps: true })
 
 

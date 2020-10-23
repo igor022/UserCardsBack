@@ -28,6 +28,7 @@ const editProject = async (req, res) => {
     const { project } = req.body;
     await Project.updateOne({ _id: project._id }, project);
     const updatedProject = await Project.findOne({ _id: project._id});
+    console.log(project);
     
     res.send(updatedProject);
   } catch(err) {

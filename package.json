@@ -20,5 +20,8 @@
     "mongoose": "^5.10.8",
     "morgan": "^1.10.0",
     "validator": "^13.1.17"
+  },
+  "engines": {
+    "node": "12.19.x"
   }
 }

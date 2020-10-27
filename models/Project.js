@@ -18,6 +18,10 @@ const projectSchema = new Schema({
   description: {
     type: String,
   },
+  stuffId: {
+    type: String,
+    required: true
+  }
 }, { timestamps: true })
 
 const Project = mongoose.model('Project', projectSchema);

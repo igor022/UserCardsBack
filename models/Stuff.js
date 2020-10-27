@@ -21,7 +21,7 @@ const stuffSchema = new Schema({
     type: String,
     required: [true, 'Please enter a password'],
     minlength: [4, 'Minimum password length is 4 characters'],
-  }
+  },
 }, { timestamps: true });
 
 stuffSchema.pre('save', async function (next) {

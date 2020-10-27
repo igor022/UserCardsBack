@@ -13,6 +13,10 @@ const userSchema = new Schema({
   description: String,
   imageUrl: String,
   tags: [],
+  stuffId: {
+    type: String,
+    required: true
+  }
 
 }, { timestamps: true })
 

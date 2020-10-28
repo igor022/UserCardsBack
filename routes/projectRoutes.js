@@ -5,7 +5,7 @@ const projectController = require('../controllers/projectController');
 
 const router = express.Router();
 
-router.get('/', requireAuth, projectController.getProjects);
+router.get('/', projectController.getProjects);
 router.post('/', requireAuth, projectController.addProject);
 router.delete('/', requireAuth, projectController.deleteProject);
 router.patch('/', requireAuth, projectController.editProject);
